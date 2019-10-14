@@ -25,6 +25,10 @@ const InnerDiv = styled.div`
   justify-content: space-around;
   align-items: center;
   padding: 0 50px;
+
+  /* form {
+    margin-top: -50px;
+  } */
 `;
 
 const StyledButton = styled(Button)`
@@ -43,7 +47,7 @@ const C = props => {
   return (
     <Container>
       <InnerDiv>
-        <Title>Project Mercury</Title>
+        <Title>Login</Title>
         <form onSubmit={handleSubmit}>
           <Form.Item
             help={touched.username && errors.username ? errors.username : ''}
