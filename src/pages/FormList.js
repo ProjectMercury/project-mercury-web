@@ -28,7 +28,7 @@ const FormList = () => {
       };
 
       return (
-        <div className="demo-infinite-container">
+        <div className="form-list-container">
           <InfiniteScroll
             initialLoad={false}
             pageStart={0}
