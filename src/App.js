@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-
 import { Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import { Login } from './pages/Login';

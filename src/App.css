@@ -2,9 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-}
 
 .App-header {
   background-color: #282c34;
@@ -19,4 +16,43 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+
+.dashboard {
+  display: flex;
+}
+
+.right-side {
+  width: 88%;
+}
+
+.left-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 22%;
+  min-height: 100vh;
+}
+
+.left-side button {
+  width: 70%;
+  height: 5%;
+  align-self: center;
+}
+
+
+.form-list-container {
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  overflow: auto;
+  padding: 8px 24px;
+  height: 500px;
+  width: 100%;
+}
+.demo-loading-container {
+  position: absolute;
+  bottom: 40px;
+  width: 100%;
+  text-align: center;
 }
