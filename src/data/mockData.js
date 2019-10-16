@@ -1,10 +1,24 @@
 export const formTypes = [
-  'multiple_choice',
-  'checkboxes',
-  'dropdown',
-  'data',
-  'time',
-  'text'
+  {
+    id: 'checkboxes',
+    name: 'Checkboxes'
+  },
+  {
+    id: 'radio',
+    name: 'Radio Buttons'
+  },
+  {
+    id: 'text',
+    name: 'Text'
+  },
+  {
+    id: 'data',
+    name: 'Data'
+  },
+  {
+    id: 'time',
+    name: 'Time'
+  }
 ];
 
 export const userData = {
