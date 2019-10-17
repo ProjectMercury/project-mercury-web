@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Icon } from 'antd';
+import { Modal, Icon, Button } from 'antd';
 import { withFormik } from 'formik';
 import CreateFormInput from '../components/CreateFormInput';
 
@@ -16,7 +16,6 @@ const C = props => {
   };
 
   const handleCancel = () => {
-    console.log('Clicked cancel button');
     props.toggleForm(false);
   };
 
@@ -25,7 +24,7 @@ const C = props => {
   return (
     <div>
       <Modal
-        title="Title"
+        title="Create New Form"
         visible={props.showForm}
         onOk={handleOk}
         confirmLoading={loading}
@@ -36,10 +35,9 @@ const C = props => {
             <CreateFormInput key={i} {...props} />
           ))}
         </form>
-        <Icon
-          type="plus-circle"
-          onClick={() => setInputCount(inputCount + 1)}
-        />
+        <Button onClick={() => setInputCount(inputCount + 1)}>
+          Add Question
+        </Button>
       </Modal>
     </div>
   );

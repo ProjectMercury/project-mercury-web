@@ -32,8 +32,7 @@ const CreateFormInput = props => {
             value={values.username}
             onChange={handleChange}
             onBlur={handleBlur}
-            placeholder="Username"
-            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+            placeholder="Question"
           />
         </Form.Item>
         <span
@@ -43,7 +42,7 @@ const CreateFormInput = props => {
             textAlign: 'center'
           }}
         >
-          -
+          {' '}
         </span>
         <Form.Item
           help={touched.username && errors.username ? errors.username : ''}
@@ -56,10 +55,9 @@ const CreateFormInput = props => {
             defaultValue="Slect an Input Type"
             size="large"
             name="username"
-            value={values.username}
+            value={values.type}
             onChange={inputTypeChange}
             onBlur={handleBlur}
-            placeholder="Username"
           >
             {formTypes.map(type => (
               <Select.Option key={type.id}>{type.name}</Select.Option>
