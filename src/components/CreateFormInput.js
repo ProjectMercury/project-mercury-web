@@ -1,13 +1,14 @@
 import React from 'react';
 
-const CreateFormInput = props => {
+import { connect } from 'react-redux';
 
-  return (
-    <div>
-
-
-    </div>
-  );
+const CreateFormInput = ({ inputs, options }) => {
+  return <div></div>;
 };
 
-export default CreateFormInput;
+const mapStateToProps = ({ inputs, options }) => ({
+  inputs,
+  options
+});
+
+export default connect(mapStateToProps)(CreateFormInput);
