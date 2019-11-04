@@ -6,6 +6,7 @@ import { Login } from './pages/Login';
 import { Signup } from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import CreateForm from './pages/CreateForm';
+import QuestionList from './components/QuestionList'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path="/signup" component={Signup} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/create" component={CreateForm} />
+      <Route path="/questions" component={QuestionList} />
     </div>
   );
 }
