@@ -7,43 +7,43 @@ import {
   EDIT_QUESTION_TITLE
 } from "../types";
 
-export function addQuestion() {
-  return {
+export const addQuestion = () => dispatch => {
+  dispatch({
     type: ADD_QUESTION
-  };
-}
+  });
+};
 
-export function handleEditQuestionTitle(id, title) {
-  return {
+export const handleEditQuestionTitle = (id, title) => dispatch => {
+  dispatch({
     type: EDIT_QUESTION_TITLE,
     payload: { id: id, title: title }
-  };
-}
+  });
+};
 
-export function deleteQuestion(id) {
-  return {
+export const deleteQuestion = id => dispatch => {
+  dispatch({
     type: DELETE_QUESTION,
     payload: id
-  };
-}
+  });
+};
 
-export function addOption(questionId) {
-  return {
+export const addOption = questionId => dispatch => {
+  dispatch({
     type: ADD_OPTION,
     payload: questionId
-  };
-}
+  });
+};
 
-export function handleEditionOptionTitle(questionId, title) {
-  return {
+export const handleEditionOptionTitle = (id, title) => dispatch => {
+  dispatch({
     type: EDIT_OPTION_TITLE,
-    payload: { id: questionId, title: title }
-  };
-}
+    payload: { id: id, title: title }
+  });
+};
 
-export function setQuestionType(id, type) {
-  return {
+export const setQuestionType = (id, type) => dispatch => {
+  dispatch({
     type: SELECT_TYPE,
     payload: { id: id, type: type }
-  };
-}
+  });
+};

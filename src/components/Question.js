@@ -1,94 +1,28 @@
-import React, { useState, useEffect } from "react";
-import {connect} from 'react-redux'
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import {
   handleEditQuestionTitle,
-  handleAddOption,
-  handleAddQuestion,
-  handleSelectType,
+  addOption,
+  addQuestion,
+  setQuestionType,
   handleEditionOptionTitle,
   deleteQuestion
 } from "../redux/actions/formActions";
-import uuid from "uuid";
 
-function Question({ question, questionIndex, questions, setQuestions }) {
-  const [type, setType] = useState("TEXT");
-  const [options, setOptions] = useState([]);
-
-  useEffect(() => console.log(type), [type, options]);
+function Question({
+  question,
+  questionIndex,
+  questions,
+  options,
+  addQuestion,
+  setQuestionType,
+  handleEditQuestionTitle,
+  addOption
+}) {
+  useEffect(() => console.log(question), [question, options]);
   console.log(options);
-  console.log(questions);
+  console.log(question);
 
-  const handleAddQuestion = e => {
-    setQuestions([
-      ...questions,
-      { id: new Date().getTime() + uuid(), title: "", type: "TEXT" }
-    ]);
-  };
-
-  const handleQuestionTitleChange = e => {
-    const questionTitleToEdit = {
-      ...questions.find(current => current.id === question.id),
-      title: e.target.value
-    };
-
-    setQuestions(
-      [
-        ...questions.filter(current => current.id !== question.id),
-        questionTitleToEdit
-      ].sort((a, b) => (a.id > b.id ? 1 : -1))
-    );
-  };
-
-  const handleSelectType = e => {
-    if (e.target.value === "text") {
-      setType("text");
-    }
-
-    if (e.target.value === "checkboxes") {
-      setType("checkboxes");
-      setOptions([
-        {
-          id: new Date().getTime() + uuid(),
-          questionId: question.id,
-          title: ""
-        }
-      ]);
-    }
-
-    if (e.target.value === "multiple_choice") {
-      setType("multiple_choice");
-      setOptions([
-        {
-          id: new Date().getTime() + uuid(),
-          questionId: question.id,
-          title: ""
-        }
-      ]);
-    }
-  };
-
-  const handleOptionChange = (id, e) => {
-    const optionToChange = {
-      ...options.find(option => option.id === id),
-      title: e.target.value
-    };
-    setOptions(
-      [...options.filter(option => option.id !== id), optionToChange].sort(
-        (a, b) => (a.id > b.id ? 1 : -1)
-      )
-    );
-  };
-
-  const handleAddOption = e => {
-    setOptions([
-      ...options,
-      { id: new Date().getTime() + uuid(), questionId: question.id, title: "" }
-    ]);
-  };
-
-  //   const relatedOptions = options.filter(
-  //     option => option.questionID === question.id
-  //   );
 
   return (
     <div style={{ marginTop: "5rem" }}>
@@ -101,7 +35,7 @@ function Question({ question, questionIndex, questions, setQuestions }) {
             type="text"
             name="title"
             placeholder="Enter question title"
-            onChange={handleQuestionTitleChange}
+            onChange={e => handleEditQuestionTitle(question.id, e.target.value)}
             style={{
               width: "300px",
               outline: 0,
@@ -114,7 +48,7 @@ function Question({ question, questionIndex, questions, setQuestions }) {
         <div>
           <select
             className="question-description-right"
-            onChange={handleSelectType}
+            onChange={e => setQuestionType(question.id, e.target.value)}
           >
             <option value="text">Text</option>
             <option value="checkboxes">Checkboxes</option>
@@ -123,7 +57,7 @@ function Question({ question, questionIndex, questions, setQuestions }) {
         </div>
       </div>
 
-      {type === "text" ? (
+      {question.type === "text" ? (
         <input
           type="text"
           placeholder="Short text answer input"
@@ -136,64 +70,71 @@ function Question({ question, questionIndex, questions, setQuestions }) {
           }}
         ></input>
       ) : (
-        options.map((option, index) => {
-          switch (type) {
-            case "checkboxes":
-              return (
-                <div
-                  key={option.id}
-                  style={{ display: "flex", justifyContent: "center" }}
-                >
-                  <form>
-                    <input type="checkbox" disabled />{" "}
-                    <input
-                      style={{
-                        outline: 0,
-                        borderWidth: "0 0 1px",
-                        borderColor: "blue"
-                      }}
-                      type="text"
-                      placeholder={`Option ${index + 1}`}
-                      onChange={e => handleOptionChange(option.id, e)}
-                    />
-                  </form>
+        options
+          .filter(option => option.questionId === question.id)
+          .map((option, index) => {
+            switch (question.type) {
+              case "checkboxes":
+                console.log(question);
+                return (
+                  <div
+                    key={option.id}
+                    style={{ display: "flex", justifyContent: "center" }}
+                  >
+                    <form>
+                      <input type="checkbox" disabled />{" "}
+                      <input
+                        style={{
+                          outline: 0,
+                          borderWidth: "0 0 1px",
+                          borderColor: "blue"
+                        }}
+                        type="text"
+                        placeholder={`Option ${index + 1}`}
+                        onChange={e =>
+                          handleEditionOptionTitle(option.id, e.target.value)
+                        }
+                      />
+                    </form>
 
-                  {index === options.length - 1 && (
-                    <button onClick={handleAddOption}>+</button>
-                  )}
-                </div>
-              );
+                    {index === options.length - 1 && (
+                      <button onClick={e => addOption(question.id)}>+</button>
+                    )}
+                  </div>
+                );
 
-            case "multiple_choice":
-              return (
-                <div
-                  key={option.id}
-                  style={{ display: "flex", justifyContent: "center" }}
-                >
-                  <form>
-                    <input type="radio" disabled />{" "}
-                    <input
-                      style={{
-                        outline: 0,
-                        borderWidth: "0 0 1px",
-                        borderColor: "blue"
-                      }}
-                      type="text"
-                      placeholder={`Option ${index + 1}`}
-                      onChange={e => handleOptionChange(option.id, e)}
-                    />
-                  </form>
+              case "multiple_choice":
+                return (
+                  <div
+                    key={option.id}
+                    style={{ display: "flex", justifyContent: "center" }}
+                  >
+                    <form>
+                      <input type="radio" disabled />{" "}
+                      <input
+                        style={{
+                          outline: 0,
+                          borderWidth: "0 0 1px",
+                          borderColor: "blue"
+                        }}
+                        type="text"
+                        placeholder={`Option ${index + 1}`}
+                        onChange={e =>
+                          handleEditionOptionTitle(option.id, e.target.vaue)
+                        }
+                      />
+                    </form>
 
-                  {index === options.length - 1 && (
-                    <button onClick={handleAddOption}>+</button>
-                  )}
-                </div>
-              );
+                    {index === options.length - 1 && (
+                      <button onClick={e => addOption(question.id)}>+</button>
+                    )}
+                  </div>
+                );
 
-            default:
-              return null;
-          }
-        })
+              default:
+                return null;
+            }
+          })
       )}
       {questionIndex === questions.length - 1 && (
         <button
@@ -203,7 +144,7 @@ function Question({ question, questionIndex, questions, setQuestions }) {
             margin: "0 auto",
             marginTop: "1rem"
           }}
-          onClick={handleAddQuestion}
+          onClick={addQuestion}
         >
           Add Question
         </button>
@@ -214,7 +155,8 @@ function Question({ question, questionIndex, questions, setQuestions }) {
 
 const mapStateToProps = state => {
   return {
-    questions: state.questions.questions
+    questions: state.questions.questions,
+    options: state.options.options
   };
 };
 
@@ -222,9 +164,9 @@ export default connect(
   mapStateToProps,
   {
     handleEditQuestionTitle,
-    handleAddOption,
-    handleAddQuestion,
-    handleSelectType,
+    addOption,
+    addQuestion,
+    setQuestionType,
     handleEditionOptionTitle,
     deleteQuestion
   }

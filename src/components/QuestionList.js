@@ -10,7 +10,6 @@ function QuestionList({ questions }) {
           key={question.id}
           question={question}
           questionIndex={index}
-          questions={questions}
         />
       ))}
     </div>
