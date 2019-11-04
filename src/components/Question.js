@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
-import uuid from 'uuid'
+import {connect} from 'react-redux'
+import {
+  handleEditQuestionTitle,
+  handleAddOption,
+  handleAddQuestion,
+  handleSelectType,
+  handleEditionOptionTitle,
+  deleteQuestion
+} from "../redux/actions/formActions";
+import uuid from "uuid";
 
-export default function Question({
-  question,
-  questionIndex,
-  questions,
-  setQuestions
-}) {
+function Question({ question, questionIndex, questions, setQuestions }) {
   const [type, setType] = useState("TEXT");
   const [options, setOptions] = useState([]);
 
@@ -43,14 +47,22 @@ export default function Question({
     if (e.target.value === "checkboxes") {
       setType("checkboxes");
       setOptions([
-        { id: new Date().getTime() + uuid(), questionId: question.id, title: "" }
+        {
+          id: new Date().getTime() + uuid(),
+          questionId: question.id,
+          title: ""
+        }
       ]);
     }
 
     if (e.target.value === "multiple_choice") {
       setType("multiple_choice");
       setOptions([
-        { id: new Date().getTime() + uuid(), questionId: question.id, title: "" }
+        {
+          id: new Date().getTime() + uuid(),
+          questionId: question.id,
+          title: ""
+        }
       ]);
     }
   };
@@ -199,3 +211,21 @@ export default function Question({
     </div>
   );
 }
+
+const mapStateToProps = state => {
+  return {
+    questions: state.questions.questions
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  {
+    handleEditQuestionTitle,
+    handleAddOption,
+    handleAddQuestion,
+    handleSelectType,
+    handleEditionOptionTitle,
+    deleteQuestion
+  }
+)(Question);

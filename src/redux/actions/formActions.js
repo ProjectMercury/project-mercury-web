@@ -34,7 +34,7 @@ export function addOption(questionId) {
   };
 }
 
-export function editionOptionTitle(questionId, title) {
+export function handleEditionOptionTitle(questionId, title) {
   return {
     type: EDIT_OPTION_TITLE,
     payload: { id: questionId, title: title }
