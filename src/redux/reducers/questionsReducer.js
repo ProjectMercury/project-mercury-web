@@ -15,7 +15,6 @@ const initialState = {
     }
   ]
 };
-
 export const questionsReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_QUESTION:
@@ -33,31 +32,35 @@ export const questionsReducer = (state = initialState, action) => {
         questions: newQuestions
       };
     case EDIT_QUESTION_TITLE:
-      const questionTitleToEdit = {
-        ...state.questions.find(current => current.id === action.payload.id),
+      const index = state.questions.findIndex(
+        index => index.id === action.payload.id
+      );
+      const updatedQuestion = {
+        ...state.questions[index],
         title: action.payload.title
       };
       return {
         questions: [
-          ...state.questions.filter(
-            current => current.id !== action.payload.id
-          ),
-          questionTitleToEdit
-        ].sort((a, b) => (a.id > b.id ? 1 : -1))
+          ...state.questions.slice(0, index),
+          updatedQuestion,
+          ...state.questions.slice(index + 1)
+        ]
       };
 
     case SELECT_TYPE:
-      const questionToChangeType = {
-        ...state.questions.find(current => current.id === action.payload.id),
+      const indexOfQuestion = state.questions.findIndex(
+        index => index.id === action.payload.id
+      );
+      const updatedQuestionType = {
+        ...state.questions[indexOfQuestion],
         type: action.payload.type
       };
       return {
         questions: [
-          ...state.questions.filter(
-            current => current.id !== action.payload.id
-          ),
-          questionToChangeType
-        ].sort((a, b) => (a.id > b.id ? 1 : -1))
+          ...state.questions.slice(0, indexOfQuestion),
+          updatedQuestionType,
+          ...state.questions.slice(indexOfQuestion + 1)
+        ]
       };
     default:
       return state;

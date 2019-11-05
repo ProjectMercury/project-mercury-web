@@ -20,8 +20,6 @@ function Question({
   addOption
 }) {
   useEffect(() => console.log(question), [question, options]);
-  console.log(options);
-  console.log(question);
 
   return (
     <div style={{ marginTop: "5rem" }}>

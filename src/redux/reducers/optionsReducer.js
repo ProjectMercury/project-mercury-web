@@ -19,15 +19,19 @@ export const optionsReducer = (state = initialState, action) => {
         ]
       };
     case EDIT_OPTION_TITLE:
-      const optionToChange = {
-        ...state.options.find(option => option.id === action.payload.id),
+      const index = state.options.findIndex(
+        index => index.id === action.payload.id
+      );
+      const updatedOption = {
+        ...state.options[index],
         title: action.payload.title
       };
       return {
         options: [
-          ...state.options.filter(option => option.id !== action.payload.id),
-          optionToChange
-        ].sort((a, b) => (a.id > b.id ? 1 : -1))
+          ...state.options.slice(0, index),
+          updatedOption,
+          ...state.options.slice(index + 1)
+        ]
       };
 
     case SELECT_TYPE:
