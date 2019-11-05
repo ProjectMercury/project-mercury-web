@@ -23,7 +23,6 @@ function Question({
   console.log(options);
   console.log(question);
 
-
   return (
     <div style={{ marginTop: "5rem" }}>
       <div
@@ -97,7 +96,11 @@ function Question({
                       />
                     </form>
 
-                    {index === options.length - 1 && (
+                    {index ===
+                      options.filter(
+                        option => option.questionId === question.id
+                      ).length -
+                        1 && (
                       <button onClick={e => addOption(question.id)}>+</button>
                     )}
                   </div>
@@ -125,7 +128,11 @@ function Question({
                       />
                     </form>
 
-                    {index === options.length - 1 && (
+                    {index ===
+                      options.filter(
+                        option => option.questionId === question.id
+                      ).length -
+                        1 && (
                       <button onClick={e => addOption(question.id)}>+</button>
                     )}
                   </div>

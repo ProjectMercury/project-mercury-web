@@ -31,12 +31,28 @@ export const optionsReducer = (state = initialState, action) => {
       };
 
     case SELECT_TYPE:
-      switch (action.payload.type) {
-        case "text":
-          return state
-        default:
+      if (action.payload.type === "text") return state;
+      else {
+        if (
+          state.options.find(option => option.questionId === action.payload.id)
+        ) {
           return {
-            options: [{
+            options: [
+              ...state.options.filter(
+                option => option.questionId !== action.payload.id
+              ),
+              {
+                id: new Date().getTime() + uuid(),
+                questionId: action.payload.id,
+                title: ""
+              }
+            ]
+          };
+        } else
+          return {
+            options: [
+              ...state.options,
+              {
                 id: new Date().getTime() + uuid(),
                 questionId: action.payload.id,
                 title: ""
