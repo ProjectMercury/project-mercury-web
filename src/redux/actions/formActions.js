@@ -4,7 +4,8 @@ import {
   DELETE_QUESTION,
   SELECT_TYPE,
   EDIT_OPTION_TITLE,
-  EDIT_QUESTION_TITLE
+  EDIT_QUESTION_TITLE,
+  DELETE_OPTION
 } from "../types";
 
 export const addQuestion = () => dispatch => {
@@ -45,5 +46,12 @@ export const setQuestionType = (id, type) => dispatch => {
   dispatch({
     type: SELECT_TYPE,
     payload: { id: id, type: type }
+  });
+};
+
+export const deleteOption = id => dispatch => {
+  dispatch({
+    type: DELETE_OPTION,
+    payload: id
   });
 };

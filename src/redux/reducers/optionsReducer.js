@@ -1,5 +1,10 @@
 import uuid from "uuid";
-import { EDIT_OPTION_TITLE, ADD_OPTION, SELECT_TYPE } from "../types";
+import {
+  EDIT_OPTION_TITLE,
+  ADD_OPTION,
+  SELECT_TYPE,
+  DELETE_OPTION
+} from "../types";
 
 const initialState = {
   options: []
@@ -32,6 +37,10 @@ export const optionsReducer = (state = initialState, action) => {
           updatedOption,
           ...state.options.slice(index + 1)
         ]
+      };
+    case DELETE_OPTION:
+      return {
+        options: state.options.filter(option => option.id !== action.payload)
       };
 
     case SELECT_TYPE:

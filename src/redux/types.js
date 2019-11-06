@@ -4,3 +4,4 @@ export const DELETE_QUESTION = "DELETE_QUESTION";
 export const ADD_OPTION = "ADD_OPTION";
 export const EDIT_OPTION_TITLE = "EDIT_OPTION_TITLE";
 export const SELECT_TYPE = "SELECT_TYPE"
+export const  DELETE_OPTION = "DELETE_OPTION"

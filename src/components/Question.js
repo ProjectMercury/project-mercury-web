@@ -6,7 +6,8 @@ import {
   addQuestion,
   setQuestionType,
   handleEditionOptionTitle,
-  deleteQuestion
+  deleteOption,
+  deleteQuestion,
 } from "../redux/actions/formActions";
 
 function Question({
@@ -17,9 +18,10 @@ function Question({
   addQuestion,
   setQuestionType,
   handleEditQuestionTitle,
+  deleteOption,
   addOption
 }) {
-  useEffect(() => console.log(question), [question, options]);
+  useEffect(() => console.log(options), [question, questions, options]);
 
   return (
     <div style={{ marginTop: "5rem" }}>
@@ -72,7 +74,6 @@ function Question({
           .map((option, index) => {
             switch (question.type) {
               case "checkboxes":
-                console.log(question);
                 return (
                   <div
                     key={option.id}
@@ -93,7 +94,7 @@ function Question({
                         }
                       />
                     </form>
-
+                    <button onClick={e => deleteOption(option.id)}>X</button>
                     {index ===
                       options.filter(
                         option => option.questionId === question.id
@@ -125,7 +126,7 @@ function Question({
                         }
                       />
                     </form>
-
+                    <button onClick={e => deleteOption(option.id)}>X</button>
                     {index ===
                       options.filter(
                         option => option.questionId === question.id
@@ -141,19 +142,18 @@ function Question({
             }
           })
       )}
-      {questionIndex === questions.length - 1 && (
-        <button
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            margin: "0 auto",
-            marginTop: "1rem"
-          }}
-          onClick={addQuestion}
-        >
-          Add Question
-        </button>
-      )}
+
+      <button
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          margin: "0 auto",
+          marginTop: "1rem"
+        }}
+        onClick={addQuestion}
+      >
+        Add Question
+      </button>
     </div>
   );
 }
@@ -168,11 +168,12 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   {
+    deleteOption,
     handleEditQuestionTitle,
     addOption,
     addQuestion,
     setQuestionType,
     handleEditionOptionTitle,
-    deleteQuestion
+    deleteQuestion,
   }
 )(Question);

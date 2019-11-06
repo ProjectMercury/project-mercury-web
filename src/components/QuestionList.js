@@ -4,14 +4,17 @@ import Question from "./Question";
 
 function QuestionList({ questions }) {
   return (
-    <div>
-      {questions.map((question, index) => (
-        <Question
-          key={question.id}
-          question={question}
-          questionIndex={index}
-        />
-      ))}
+    <div className="survey-container">
+      <div>
+        {questions.map((question, index) => (
+          <Question
+            key={question.id}
+            question={question}
+            questionIndex={index}
+          />
+        ))}
+      </div>
+     <button disabled style={{marginTop: "1.5rem"}} >Submit Form</button>   {/* this will post to the endpoint */}
     </div>
   );
 }
