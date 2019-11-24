@@ -1,8 +1,13 @@
-import React from "react";
-import { connect } from "react-redux";
-import Question from "./Question";
+import React from 'react';
+import { connect } from 'react-redux';
+import Question from './Question';
+import { submitForm } from '../redux/actions/formActions';
 
-function QuestionList({ questions }) {
+function QuestionList({ options, questions, submitForm, history }) {
+  const handleSubmit = () => {
+    submitForm(questions, options, history);
+  };
+
   return (
     <div className="survey-container">
       <div>
@@ -14,18 +19,22 @@ function QuestionList({ questions }) {
           />
         ))}
       </div>
-     <button disabled style={{marginTop: "1.5rem"}} >Submit Form</button>   {/* this will post to the endpoint */}
+      <button style={{ marginTop: '1.5rem' }} onClick={handleSubmit}>
+        Submit Form
+      </button>{' '}
+      {/* this will post to the endpoint */}
     </div>
   );
 }
 
 const mapStateToProps = state => {
   return {
-    questions: state.questions.questions
+    questions: state.questions.questions,
+    options: state.options.options
   };
 };
 
 export default connect(
   mapStateToProps,
-  {}
+  { submitForm }
 )(QuestionList);

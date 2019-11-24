@@ -2,11 +2,14 @@ import React from 'react';
 import './App.css';
 import { Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
-import { Login } from './pages/Login';
+import Login from './pages/Login';
 import { Signup } from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import CreateForm from './pages/CreateForm';
-import QuestionList from './components/QuestionList'
+import QuestionList from './components/QuestionList';
+import PrivateRoute from './components/PrivateRoute';
+import PreviewPage from './pages/PreviewPage';
+import Respondent from './pages/Respondent';
 
 function App() {
   return (
@@ -14,9 +17,11 @@ function App() {
       <Route exact path="/" component={LandingPage} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
-      <Route path="/dashboard" component={Dashboard} />
-      <Route path="/create" component={CreateForm} />
-      <Route path="/questions" component={QuestionList} />
+      <PrivateRoute path="/dashboard" component={Dashboard} />
+      <PrivateRoute path="/create" component={CreateForm} />
+      <PrivateRoute path="/questions" component={QuestionList} />
+      <PrivateRoute path="/preview" component={PreviewPage} />
+      <Route exact path="/:id" component={Respondent} />
     </div>
   );
 }

@@ -4,6 +4,9 @@ import styled from 'styled-components';
 import * as yup from 'yup';
 import { withFormik } from 'formik';
 import { Button, Input, Icon, Typography, Form } from 'antd';
+import { userLogin } from '../redux/actions/userActions';
+import { connect } from 'react-redux';
+
 const { Title } = Typography;
 
 const Container = styled.div`
@@ -50,18 +53,16 @@ const C = props => {
         <Title>Login</Title>
         <form onSubmit={handleSubmit}>
           <Form.Item
-            help={touched.username && errors.username ? errors.username : ''}
-            validateStatus={
-              touched.username && errors.username ? 'error' : undefined
-            }
+            help={touched.email && errors.email ? errors.email : ''}
+            validateStatus={touched.email && errors.email ? 'error' : undefined}
           >
             <Input
               size="large"
-              name="username"
-              value={values.username}
+              name="email"
+              value={values.email}
               onChange={handleChange}
               onBlur={handleBlur}
-              placeholder="Username"
+              placeholder="Email"
               prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
             />
           </Form.Item>
@@ -91,18 +92,28 @@ const C = props => {
 };
 
 const validationSchema = yup.object().shape({
-  username: yup.string().required('Please provide a name'),
+  email: yup.string().required('Please provide a name'),
   password: yup
     .string()
     .required('Please provide a password')
-    .min(8, 'Password too short')
+    .min(4, 'Password too short')
 });
 
-export const Login = withFormik({
-  mapPropsToValues: () => ({ username: '', password: '' }),
-  handleSubmit: (values, { setSubmitting }) => {
+const Login = withFormik({
+  mapPropsToValues: () => ({ email: '', password: '' }),
+  handleSubmit: (values, { props, setSubmitting }) => {
     console.log(values);
+    props.userLogin(values.email, values.password, props.history);
     setSubmitting(false);
   },
   validationSchema: validationSchema
 })(C);
+
+const mapStateToProps = state => state.questions;
+const mapActionToProps = {
+  userLogin
+};
+export default connect(
+  mapStateToProps,
+  mapActionToProps
+)(Login);

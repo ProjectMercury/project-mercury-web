@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import {
   handleEditQuestionTitle,
   addOption,
@@ -7,8 +7,8 @@ import {
   setQuestionType,
   handleEditionOptionTitle,
   deleteOption,
-  deleteQuestion,
-} from "../redux/actions/formActions";
+  deleteQuestion
+} from '../redux/actions/formActions';
 
 function Question({
   question,
@@ -18,16 +18,17 @@ function Question({
   addQuestion,
   setQuestionType,
   handleEditQuestionTitle,
+  handleEditionOptionTitle,
   deleteOption,
   addOption
 }) {
   useEffect(() => console.log(options), [question, questions, options]);
 
   return (
-    <div style={{ marginTop: "5rem" }}>
+    <div style={{ marginTop: '5rem' }}>
       <div
         className="question-description"
-        style={{ display: "flex", justifyContent: "center" }}
+        style={{ display: 'flex', justifyContent: 'center' }}
       >
         <div className="question-description-left">
           <input
@@ -36,11 +37,11 @@ function Question({
             placeholder="Enter question title"
             onChange={e => handleEditQuestionTitle(question.id, e.target.value)}
             style={{
-              width: "300px",
+              width: '300px',
               outline: 0,
-              borderWidth: "0 0 1px",
-              borderColor: "blue",
-              marginBottom: "1rem"
+              borderWidth: '0 0 1px',
+              borderColor: 'blue',
+              marginBottom: '1rem'
             }}
           />
         </div>
@@ -56,16 +57,16 @@ function Question({
         </div>
       </div>
 
-      {question.type === "text" ? (
+      {question.type === 'text' ? (
         <input
           type="text"
           placeholder="Short text answer input"
           disabled
           style={{
             outline: 0,
-            borderWidth: "0 0 1px",
-            borderColor: "blue",
-            width: "180px"
+            borderWidth: '0 0 1px',
+            borderColor: 'blue',
+            width: '180px'
           }}
         ></input>
       ) : (
@@ -73,19 +74,19 @@ function Question({
           .filter(option => option.questionId === question.id)
           .map((option, index) => {
             switch (question.type) {
-              case "checkboxes":
+              case 'checkboxes':
                 return (
                   <div
                     key={option.id}
-                    style={{ display: "flex", justifyContent: "center" }}
+                    style={{ display: 'flex', justifyContent: 'center' }}
                   >
                     <form>
-                      <input type="checkbox" disabled />{" "}
+                      <input type="checkbox" disabled />{' '}
                       <input
                         style={{
                           outline: 0,
-                          borderWidth: "0 0 1px",
-                          borderColor: "blue"
+                          borderWidth: '0 0 1px',
+                          borderColor: 'blue'
                         }}
                         type="text"
                         placeholder={`Option ${index + 1}`}
@@ -105,24 +106,24 @@ function Question({
                   </div>
                 );
 
-              case "multiple_choice":
+              case 'multiple_choice':
                 return (
                   <div
                     key={option.id}
-                    style={{ display: "flex", justifyContent: "center" }}
+                    style={{ display: 'flex', justifyContent: 'center' }}
                   >
                     <form>
-                      <input type="radio" disabled />{" "}
+                      <input type="radio" disabled />{' '}
                       <input
                         style={{
                           outline: 0,
-                          borderWidth: "0 0 1px",
-                          borderColor: "blue"
+                          borderWidth: '0 0 1px',
+                          borderColor: 'blue'
                         }}
                         type="text"
                         placeholder={`Option ${index + 1}`}
                         onChange={e =>
-                          handleEditionOptionTitle(option.id, e.target.vaue)
+                          handleEditionOptionTitle(option.id, e.target.value)
                         }
                       />
                     </form>
@@ -145,10 +146,10 @@ function Question({
 
       <button
         style={{
-          display: "flex",
-          flexDirection: "column",
-          margin: "0 auto",
-          marginTop: "1rem"
+          display: 'flex',
+          flexDirection: 'column',
+          margin: '0 auto',
+          marginTop: '1rem'
         }}
         onClick={addQuestion}
       >
@@ -174,6 +175,6 @@ export default connect(
     addQuestion,
     setQuestionType,
     handleEditionOptionTitle,
-    deleteQuestion,
+    deleteQuestion
   }
 )(Question);
