@@ -2,7 +2,6 @@
   text-align: center;
 }
 
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -18,21 +17,9 @@
   color: #09d3ac;
 }
 
-
-.dashboard {
-  display: flex;
-}
-
 .right-side {
   width: 88%;
-}
-
-.left-side {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  width: 22%;
-  min-height: 100vh;
+  margin-left: 33%;
 }
 
 .left-side button {
@@ -40,7 +27,6 @@
   height: 5%;
   align-self: center;
 }
-
 
 .form-list-container {
   border: 1px solid #e8e8e8;

@@ -1,9 +1,9 @@
-import { CREATE_FORM } from '../types';
+import { CREATE_FORM, GET_USER_DETAILS, GET_RESPONSE_COUNT } from "../types";
 
 const initialState = {
   loading: false,
   authenticated: false,
-  credentials: {},
+  data: {},
   lastFormId: null
 };
 
@@ -13,6 +13,17 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         lastFormId: action.payload
+      };
+
+    case GET_USER_DETAILS:
+      return {
+        ...state,
+        data: action.payload
+      };
+    case GET_RESPONSE_COUNT:
+      return {
+        ...state,
+        data: { ...state.data, responseCount: action.payload.responseCount }
       };
     default:
       return state;

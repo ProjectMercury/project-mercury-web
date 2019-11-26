@@ -1,18 +1,39 @@
-import axios from 'axios';
+import axios from "axios";
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
+import { GET_USER_DETAILS, GET_RESPONSE_COUNT } from "../types";
 
 export const userLogin = (email, password, history) => async dispatch => {
   try {
     let res = await axios.post(
-      'https://us-central1-form-builder-97c3a.cloudfunctions.net/api/login',
+      "https://us-central1-form-builder-97c3a.cloudfunctions.net/api/login",
       {
         email,
         password
       }
     );
 
-    localStorage.setItem('token', `${res.data.token}`);
-    history.push('/questions');
+    localStorage.setItem("token", `${res.data.token}`);
+
+    history.push("/dashboard");
   } catch (error) {
     console.error(error.message);
+  }
+};
+
+export const getDetails = () => async dispatch => {
+  try {
+    let info = await axiosWithAuth().get("/users");
+
+    dispatch({
+      type: GET_USER_DETAILS,
+      payload: info.data
+    });
+    let responseCount = await axiosWithAuth().get("/forms/responses/count");
+    dispatch({
+      type: GET_RESPONSE_COUNT,
+      payload: responseCount.data
+    });
+  } catch (error) {
+    console.error(error);
   }
 };

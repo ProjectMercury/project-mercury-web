@@ -1,33 +1,49 @@
-import React from 'react';
-import { Button, Avatar } from 'antd';
-import { userData } from '../data/mockData';
-import FormList from '../components/FormList';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from "react";
+import styled from "styled-components";
+import { connect } from "react-redux";
 
-const Dashboard = () => {
+import Topbar from "../components/Topbar";
+import Sidebar from "../components/Sidebar";
+import DashboardFormDetails from "../components/DashboardFormDetails";
+import RecentActivities from "../components/RecentActivities";
+import ResponseRate from "../components/ResponseRate";
+
+import { getDetails } from "../redux/actions/userActions";
+
+const Dashboard = ({ getDetails }) => {
+  useEffect(() => {
+    getDetails();
+  }, []);
+
   return (
-    <div className="dashboard">
-      <div className="left-side">
-        <div className="user-profile">
-          <Avatar size={200} icon="user" />
-          <h1>{userData.name}</h1>
-          <p>Lambda School</p>
-          <p>{userData.form_count} forms created</p>
-          <p>900 responses </p>
+    <Div>
+      <Topbar />
+      <div>
+        <Sidebar />
+        <DashboardFormDetails />
+        <div className="bottom">
+          <RecentActivities />
+          <ResponseRate />
         </div>
-
-        <Link to="/create">
-          <Button type="primary" icon="plus" size="large">
-            Create Form
-          </Button>
-        </Link>
-
-        <FormList />
       </div>
-
-      <div className="right-side"></div>
-    </div>
+    </Div>
   );
 };
 
-export default Dashboard;
+const Div = styled.div`
+  background: #f0f4ff;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  .bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 17vw;
+    margin-top: 10vh;
+    width: 75vw;
+  }
+`;
+
+export default connect(null, { getDetails })(Dashboard);

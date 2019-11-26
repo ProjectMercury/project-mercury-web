@@ -1,15 +1,15 @@
-import React from 'react';
-import './App.css';
-import { Route } from 'react-router-dom';
-import LandingPage from './pages/LandingPage';
-import Login from './pages/Login';
-import { Signup } from './pages/Signup';
-import Dashboard from './pages/Dashboard';
-import CreateForm from './pages/CreateForm';
-import QuestionList from './components/QuestionList';
-import PrivateRoute from './components/PrivateRoute';
-import PreviewPage from './pages/PreviewPage';
-import Respondent from './pages/Respondent';
+import React from "react";
+import "./App.css";
+import { Route } from "react-router-dom";
+import LandingPage from "./pages/LandingPage";
+import Login from "./pages/Login";
+import { Signup } from "./pages/Signup";
+import Dashboard from "./pages/Dashboard";
+import CreateForm from "./pages/CreateForm";
+import QuestionList from "./components/QuestionList";
+import PrivateRoute from "./components/PrivateRoute";
+import PreviewPage from "./pages/PreviewPage";
+import Respondent from "./pages/Respondent";
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
       <PrivateRoute path="/create" component={CreateForm} />
       <PrivateRoute path="/questions" component={QuestionList} />
       <PrivateRoute path="/preview" component={PreviewPage} />
-      <Route exact path="/:id" component={Respondent} />
+      {/* <Route exact path="/:id" component={Respondent} /> */}
     </div>
   );
 }
