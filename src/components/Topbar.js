@@ -17,7 +17,8 @@ const Div = styled.div`
   justify-content: flex-end;
   padding-right: 5vw;
   align-items: center;
-  font-size: 20px;
+  font-size: 18px;
+  font-family: "Muli";
   i {
     margin-left: 20px;
   }
