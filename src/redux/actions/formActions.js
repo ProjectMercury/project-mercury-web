@@ -9,8 +9,8 @@ import {
   CREATE_FORM,
   GET_QUESTIONS,
   RESPONSE_INPUT_CHANGE
-} from '../types';
-import { axiosWithAuth } from '../../utils/axiosWithAuth';
+} from "../types";
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
 export const addQuestion = () => dispatch => {
   dispatch({
@@ -64,7 +64,7 @@ export const submitForm = (questions, options, history) => async dispatch => {
   const inputs = [...questions];
   try {
     let newForm = await axiosWithAuth().post(
-      'https://us-central1-form-builder-97c3a.cloudfunctions.net/api/forms',
+      "https://us-central1-form-builder-97c3a.cloudfunctions.net/api/forms",
       { inputs, options }
     );
     console.log(newForm.data);
@@ -72,7 +72,7 @@ export const submitForm = (questions, options, history) => async dispatch => {
       type: CREATE_FORM,
       payload: newForm.data.formId
     });
-    history.push('/preview');
+    history.push("/preview");
   } catch (error) {
     console.log(error);
   }

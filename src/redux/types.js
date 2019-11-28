@@ -5,7 +5,7 @@ export const ADD_OPTION = "ADD_OPTION";
 export const EDIT_OPTION_TITLE = "EDIT_OPTION_TITLE";
 export const SELECT_TYPE = "SELECT_TYPE";
 export const DELETE_OPTION = "DELETE_OPTION";
-
+export const LOADING_USER = "LOADING_USER";
 export const CREATE_FORM = "CREATE_FORM";
 
 export const GET_QUESTIONS = "GET_QUESTIONS";

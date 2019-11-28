@@ -1,6 +1,6 @@
 import axios from "axios";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
-import { GET_USER_DETAILS, GET_RESPONSE_COUNT } from "../types";
+import { GET_USER_DETAILS, GET_RESPONSE_COUNT, LOADING_USER } from "../types";
 
 export const userLogin = (email, password, history) => async dispatch => {
   try {
@@ -13,7 +13,8 @@ export const userLogin = (email, password, history) => async dispatch => {
     );
 
     localStorage.setItem("token", `${res.data.token}`);
-
+    localStorage.setItem("refreshToken", `${res.data.refreshToken}`);
+    dispatch(getDetails());
     history.push("/dashboard");
   } catch (error) {
     console.error(error.message);
@@ -22,6 +23,9 @@ export const userLogin = (email, password, history) => async dispatch => {
 
 export const getDetails = () => async dispatch => {
   try {
+    dispatch({
+      type: LOADING_USER
+    });
     let info = await axiosWithAuth().get("/users");
 
     dispatch({

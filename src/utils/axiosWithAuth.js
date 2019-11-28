@@ -1,12 +1,16 @@
-import axios from 'axios';
+import axios from "axios";
+import refreshAccessToken from "./refreshAccessToken";
 
 export const axiosWithAuth = () => {
-  const token = localStorage.getItem('token');
-
-  return axios.create({
-    baseURL: 'https://us-central1-form-builder-97c3a.cloudfunctions.net/api',
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
+  let instance = axios.create({
+    baseURL: "https://us-central1-form-builder-97c3a.cloudfunctions.net/api"
   });
+  instance.interceptors.request.use(async config => {
+    const token = localStorage.getItem("token");
+    const refreshedToken = await refreshAccessToken(token);
+
+    config.headers["Authorization"] = `Bearer ${refreshedToken}`;
+    return config;
+  });
+  return instance;
 };

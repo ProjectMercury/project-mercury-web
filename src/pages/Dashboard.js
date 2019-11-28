@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import { connect } from "react-redux";
 
 import Topbar from "../components/Topbar";
 import Sidebar from "../components/Sidebar";
@@ -8,13 +7,7 @@ import DashboardFormDetails from "../components/DashboardFormDetails";
 import RecentActivities from "../components/RecentActivities";
 import ResponseRate from "../components/ResponseRate";
 
-import { getDetails } from "../redux/actions/userActions";
-
-const Dashboard = ({ getDetails }) => {
-  useEffect(() => {
-    getDetails();
-  }, []);
-
+const Dashboard = () => {
   return (
     <Div>
       <Topbar />
@@ -40,10 +33,10 @@ const Div = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-left: 17vw;
+    margin-left: 20vw;
     margin-top: 10vh;
     width: 75vw;
   }
 `;
 
-export default connect(null, { getDetails })(Dashboard);
+export default Dashboard;

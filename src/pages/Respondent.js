@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
-import { connect } from 'react-redux';
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { connect } from "react-redux";
 
-import { getForm } from '../redux/actions/formActions';
-import RespondentOptions from '../components/RespondentOptions';
+import { getForm } from "../redux/actions/formActions";
+import RespondentOptions from "../components/RespondentOptions";
 
 const Respondent = ({ getForm, questions, options, responses }) => {
   let { id } = useParams();
@@ -41,7 +41,4 @@ const Respondent = ({ getForm, questions, options, responses }) => {
   );
 };
 
-export default connect(
-  state => state.responses,
-  { getForm }
-)(Respondent);
+export default connect(state => state.responses, { getForm })(Respondent);

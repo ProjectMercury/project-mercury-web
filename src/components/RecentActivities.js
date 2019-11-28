@@ -2,7 +2,11 @@ import React from "react";
 import styled from "styled-components";
 
 const RecentActivities = () => {
-  return <Div></Div>;
+  return (
+    <Div>
+      <h5>TODO: RECENT ACTIVITIES</h5>
+    </Div>
+  );
 };
 
 const Div = styled.div`

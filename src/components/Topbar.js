@@ -1,10 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
 
-const Topbar = props => {
+const Topbar = ({
+  data: {
+    credentials: { username }
+  }
+}) => {
   return (
     <Div>
-      John Doe <i className="fas fa-caret-down"></i>
+      {username} <i className="fas fa-caret-down"></i>
     </Div>
   );
 };
@@ -23,4 +28,4 @@ const Div = styled.div`
   }
 `;
 
-export default Topbar;
+export default connect(state => state.user)(Topbar);
