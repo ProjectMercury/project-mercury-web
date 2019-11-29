@@ -6,7 +6,6 @@ const refreshAccessToken = async token => {
   if (decodedToken.exp * 1000 > Date.now()) {
     return token;
   } else {
-    console.log("refresh");
     let refreshToken = localStorage.getItem(
       "refreshToken",
       decodedToken.exp * 1000 < Date.now()

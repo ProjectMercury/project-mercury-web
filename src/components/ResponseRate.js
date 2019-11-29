@@ -3,11 +3,11 @@ import styled from "styled-components";
 import { Bar } from "react-chartjs-2";
 import { connect } from "react-redux";
 
-import { getDaysEdited, getDaysInteger, getDates } from "../utils/getDays";
+import { getDays, getDates } from "../utils/getDays";
 
 const ResponseRate = ({ data: { responseCount } }) => {
   const data = {
-    labels: getDaysEdited().reverse(),
+    labels: getDays().reverse(),
     datasets: [
       {
         label: "Response Rate",

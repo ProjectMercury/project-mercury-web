@@ -7,13 +7,7 @@ export const getDates = current => {
   return week;
 };
 
-export const getDaysInteger = () => {
-  let dates = getDates(new Date());
-  const days = dates.map(date => date.getDay());
-  return days;
-};
-
-export const getDaysEdited = () => {
+export const getDays = () => {
   const weekDays = [
     "Sunday",
     "Monday",
@@ -27,19 +21,5 @@ export const getDaysEdited = () => {
   const days = dates.map(date =>
     date.getDay() === new Date().getDay() ? "Today" : weekDays[date.getDay()]
   );
-  return days;
-};
-export const getDays = () => {
-  const weekDays = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday"
-  ];
-  let dates = getDates(new Date());
-  const days = dates.map(date => weekDays[date.getDay()]);
   return days;
 };

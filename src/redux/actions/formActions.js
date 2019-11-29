@@ -8,8 +8,10 @@ import {
   DELETE_OPTION,
   CREATE_FORM,
   GET_QUESTIONS,
-  RESPONSE_INPUT_CHANGE
+  RESPONSE_INPUT_CHANGE,
+  LOADING_USER
 } from "../types";
+import axios from "axios";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
 export const addQuestion = () => dispatch => {
@@ -78,14 +80,21 @@ export const submitForm = (questions, options, history) => async dispatch => {
   }
 };
 
-export const getForm = (questions, options) => {
-  return {
-    type: GET_QUESTIONS,
-    payload: {
-      questions,
-      options
-    }
-  };
+export const getForm = id => dispatch => {
+  dispatch({ type: LOADING_USER });
+  axios
+    .get(
+      `https://us-central1-form-builder-97c3a.cloudfunctions.net/api/forms/${id}`
+    )
+    .then(({ data: { inputs, options } }) => {
+      dispatch({
+        type: GET_QUESTIONS,
+        payload: {
+          questions: inputs,
+          options
+        }
+      });
+    });
 };
 
 export const responseInputChange = (questionId, value) => {

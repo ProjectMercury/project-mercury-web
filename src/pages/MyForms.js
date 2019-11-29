@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import { Card } from "../components/~reusables/molecues/Card";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
-import { SlowBuffer } from "buffer";
 import { heading_1 } from "../components/~reusables/variables/font-sizes";
 
 const MyForms = ({ data: { forms }, history }) => {
@@ -23,6 +22,9 @@ const MyForms = ({ data: { forms }, history }) => {
           <Card key={form.formId} onClick={() => handleClick(form.formId)}>
             <h3>{form.title}</h3>
             <p>{form.description}</p>
+            <a href={`http://localhost:3000/respondents/${form.formId}`}>
+              http://localhost:3000/respondents/{form.formId}
+            </a>
           </Card>
         ))}
       </div>

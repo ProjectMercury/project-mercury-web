@@ -9,6 +9,7 @@ const Topbar = ({
 }) => {
   return (
     <Div>
+      <i className="fas fa-bell"></i>
       {username} <i className="fas fa-caret-down"></i>
     </Div>
   );
@@ -25,6 +26,9 @@ const Div = styled.div`
   font-size: 20px;
   i {
     margin-left: 20px;
+  }
+  .fas.fa-bell {
+    margin-right: 50px;
   }
 `;
 

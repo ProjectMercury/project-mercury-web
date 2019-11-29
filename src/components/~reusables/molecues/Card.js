@@ -11,8 +11,9 @@ export const Card = styled.div`
   flex-direction: column;
   box-shadow: 0px 6px 5px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  transition: transform 0.3s;
+  text-align: left;
+  /* transition: transform 0.3s;
   &:hover {
     transform: scale(1.1);
-  }
+  } */
 `;

@@ -15,7 +15,7 @@ const Sidebar = ({
       <div>
         <Img
           alt="avatar"
-          src="https://avatars.dicebear.com/v2/male/random.svg"
+          src={`https://avatars.dicebear.com/v2/avataaars/${username}.svg`}
         />
         <h1>{username}</h1>
       </div>
@@ -40,9 +40,6 @@ const Sidebar = ({
       <Line />
 
       <div className="links">
-        <TextButton>
-          <i className="fas fa-bell"></i> Notifications
-        </TextButton>
         <TextButton>
           <i className="fas fa-cog"></i> Settings
         </TextButton>

@@ -2,7 +2,8 @@ import {
   CREATE_FORM,
   GET_USER_DETAILS,
   GET_RESPONSE_COUNT,
-  LOADING_USER
+  LOADING_USER,
+  GET_QUESTIONS
 } from "../types";
 
 const initialState = {
@@ -24,7 +25,11 @@ export const userReducer = (state = initialState, action) => {
         ...state,
         lastFormId: action.payload
       };
-
+    case GET_QUESTIONS:
+      return {
+        ...state,
+        loading: false
+      };
     case GET_USER_DETAILS:
       return {
         ...state,

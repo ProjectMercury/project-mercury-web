@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -17,6 +17,7 @@ import PreviewPage from "./pages/PreviewPage";
 import Respondent from "./pages/Respondent";
 import MyForms from "./pages/MyForms";
 import FormDetails from "./pages/FormDetails";
+import Loader from "./components/Loader";
 
 const token = localStorage.getItem("token");
 if (token) {
@@ -25,7 +26,7 @@ if (token) {
 
 function App({ getDetails, loading }) {
   return loading ? (
-    <div>spinner</div>
+    <Loader />
   ) : (
     <div className="App">
       <Route exact path="/" component={LandingPage} />
@@ -37,7 +38,7 @@ function App({ getDetails, loading }) {
       <PrivateRoute path="/create" component={CreateForm} />
       <PrivateRoute path="/questions" component={QuestionList} />
       <PrivateRoute path="/preview" component={PreviewPage} />
-      {/* <Route exact path="/:id" component={Respondent} /> */}
+      <Route exact path="/respondent/:id" component={Respondent} />
     </div>
   );
 }
