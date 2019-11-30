@@ -1,5 +1,4 @@
-import { GET_QUESTIONS, RESPONSE_INPUT_CHANGE } from '../types';
-import { stat } from 'fs';
+import { GET_QUESTIONS, RESPONSE_INPUT_CHANGE } from "../types";
 
 const initialState = {
   questions: [],
@@ -15,7 +14,7 @@ export const responsesReducer = (state = initialState, action) => {
         options: action.payload.options,
         responses: action.payload.questions.map(question => ({
           id: question.id,
-          response: ''
+          response: ""
         }))
       };
 

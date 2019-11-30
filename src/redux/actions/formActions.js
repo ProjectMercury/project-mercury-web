@@ -8,9 +8,11 @@ import {
   DELETE_OPTION,
   CREATE_FORM,
   GET_QUESTIONS,
-  RESPONSE_INPUT_CHANGE
-} from '../types';
-import { axiosWithAuth } from '../../utils/axiosWithAuth';
+  RESPONSE_INPUT_CHANGE,
+  LOADING_USER
+} from "../types";
+import axios from "axios";
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
 export const addQuestion = () => dispatch => {
   dispatch({
@@ -64,7 +66,7 @@ export const submitForm = (questions, options, history) => async dispatch => {
   const inputs = [...questions];
   try {
     let newForm = await axiosWithAuth().post(
-      'https://us-central1-form-builder-97c3a.cloudfunctions.net/api/forms',
+      "https://us-central1-form-builder-97c3a.cloudfunctions.net/api/forms",
       { inputs, options }
     );
     console.log(newForm.data);
@@ -72,20 +74,27 @@ export const submitForm = (questions, options, history) => async dispatch => {
       type: CREATE_FORM,
       payload: newForm.data.formId
     });
-    history.push('/preview');
+    history.push("/preview");
   } catch (error) {
     console.log(error);
   }
 };
 
-export const getForm = (questions, options) => {
-  return {
-    type: GET_QUESTIONS,
-    payload: {
-      questions,
-      options
-    }
-  };
+export const getForm = id => dispatch => {
+  dispatch({ type: LOADING_USER });
+  axios
+    .get(
+      `https://us-central1-form-builder-97c3a.cloudfunctions.net/api/forms/${id}`
+    )
+    .then(({ data: { inputs, options } }) => {
+      dispatch({
+        type: GET_QUESTIONS,
+        payload: {
+          questions: inputs,
+          options
+        }
+      });
+    });
 };
 
 export const responseInputChange = (questionId, value) => {

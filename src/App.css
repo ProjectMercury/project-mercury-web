@@ -43,3 +43,8 @@
   width: 100%;
   text-align: center;
 }
+
+.toast {
+  background-color: #4e67eb !important;
+  border-radius: 55px;
+}

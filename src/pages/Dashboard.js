@@ -1,6 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import { connect } from "react-redux";
+
+import "react-toastify/dist/ReactToastify.css";
+import { toast, ToastContainer } from "react-toastify";
+import { css } from "glamor";
 
 import Topbar from "../components/Topbar";
 import Sidebar from "../components/Sidebar";
@@ -8,16 +11,51 @@ import DashboardFormDetails from "../components/DashboardFormDetails";
 import RecentActivities from "../components/RecentActivities";
 import ResponseRate from "../components/ResponseRate";
 
-import { getDetails } from "../redux/actions/userActions";
+const Dashboard = (props) => {
+    const openNotifications = array => {
+      let index = 0;
+      console.log(index)
+      if (array) {
+        return notify;
+      }
+  
+      function notify() {
+        if (index !== array.length) {
+          const id = array[index].formId;
+  
+          if (toast.isActive(id)) {
+            return null;
+          }
+  
+          toast.info(
+            `${array[index].notification_count} new ${
+              array[index].notification_count > 1 ? "people have " : "person has "
+            }filled out ${array[index].form_title}`,
+            {
+              className: "toast",
+           
+              onClick: () => {
+                props.history.push(`/forms/${id}`);
+              },
+              bodyClassName: css({
+                fontSize: "0.9rem"
+              })
+            }
+          );
+  
+          console.log(index);
+          index++;
+          return notify();
+        } else index = 0;
+      }
+    };
 
-const Dashboard = ({ getDetails }) => {
-  useEffect(() => {
-    getDetails();
-  }, []);
+
 
   return (
     <Div>
-      <Topbar />
+      <ToastContainer className="toast-container" hideProgressBar={true} />
+      <Topbar history={props.history} />
       <div>
         <Sidebar />
         <DashboardFormDetails />
@@ -40,10 +78,10 @@ const Div = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-left: 17vw;
+    margin-left: 20vw;
     margin-top: 10vh;
     width: 75vw;
   }
 `;
 
-export default connect(null, { getDetails })(Dashboard);
+export default Dashboard;

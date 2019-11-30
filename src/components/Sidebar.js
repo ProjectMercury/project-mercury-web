@@ -5,15 +5,19 @@ import { connect } from "react-redux";
 
 import { ButtonPrimary, TextButton } from "./~reusables/atoms/Button";
 
-const Sidebar = ({ data: { credentials } }) => {
+const Sidebar = ({
+  data: {
+    credentials: { username }
+  }
+}) => {
   return (
     <Div>
       <div>
         <Img
           alt="avatar"
-          src="https://avatars.dicebear.com/v2/male/random.svg"
+          src={`https://avatars.dicebear.com/v2/avataaars/${username}.svg`}
         />
-        <h1>{credentials && credentials.username}</h1>
+        <h1>{username}</h1>
       </div>
       <ButtonPrimary>
         <Link to="/create" style={{ color: "white" }}>
@@ -22,19 +26,20 @@ const Sidebar = ({ data: { credentials } }) => {
       </ButtonPrimary>
       <div className="links">
         <TextButton>
-          <i className="fas fa-home"></i> Overview
+          <Link to="/dashboard">
+            <i className="fas fa-home"></i> Overview
+          </Link>
         </TextButton>
         <TextButton>
-          <i className="fas fa-file-alt"></i> My Forms
+          <Link to="/forms">
+            <i className="fas fa-file-alt"></i> My Forms
+          </Link>
         </TextButton>
       </div>
 
       <Line />
 
       <div className="links">
-        <TextButton>
-          <i className="fas fa-bell"></i> Notifications
-        </TextButton>
         <TextButton>
           <i className="fas fa-cog"></i> Settings
         </TextButton>
@@ -54,7 +59,7 @@ const Div = styled.div`
   padding: 30px;
   justify-content: space-evenly;
   align-items: center;
-  max-width: 400px;
+  width: 20vw;
 
   .links {
     display: flex;
