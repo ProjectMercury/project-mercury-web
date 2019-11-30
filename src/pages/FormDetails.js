@@ -9,6 +9,7 @@ const FormDetails = ({
   },
   history
 }) => {
+  
   const [responses, setResponses] = useState([]);
 
   useEffect(() => {
@@ -20,7 +21,7 @@ const FormDetails = ({
   }, []);
   return (
     <div>
-      <Topbar history={history}/>
+      <Topbar history={history} />
       <Sidebar />
       <div>Form: {id}</div>
       {/* {responses.map(response => (

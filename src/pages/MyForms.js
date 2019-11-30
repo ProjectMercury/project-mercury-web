@@ -14,7 +14,7 @@ const MyForms = ({ data: { forms }, history }) => {
 
   return (
     <Div>
-      <Topbar />
+      <Topbar history={history} />
       <Sidebar />
       <h1 className="heading">My Forms</h1>
       <div className="cards">

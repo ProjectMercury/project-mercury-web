@@ -1,7 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import { connect } from "react-redux";
-import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from "react-toastify";
 
 import { getDetails } from "./redux/actions/userActions";
@@ -26,11 +25,14 @@ if (token) {
   store.dispatch(getDetails());
 }
 
+toast.configure();
+
 function App({ getDetails, loading }) {
   return loading ? (
     <Loader />
   ) : (
     <div className="App">
+      <ToastContainer className="toast-container" hideProgressBar={true} />
       <Route exact path="/" component={LandingPage} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
